@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 import basicSsl from '@vitejs/plugin-basic-ssl';
 
-const gitRepoName = 'SpotifyVideoViewer';
+const gitRepoName = 'SpotifyCanvasViewer';
 
 export default defineConfig(({ mode }) => ({
     base: mode === 'production' ? `/${gitRepoName}/` : '/',
