@@ -1,0 +1,10 @@
+.screenrc
+.DS_STORE
+
+/.firebase/
+
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+/dist/
