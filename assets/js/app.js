@@ -1,6 +1,8 @@
-const client_id = 'bea258c573cd464cbbc7310c407febd0';
-const client_secret = '0afc333f9de64387a43888b87b7ce28c';
+const client_id = import.meta.env.SPOTIFY_CLIENT_ID;
+const client_secret = import.meta.env.SPOTIFY_CLIENT_SECRET;
 const playlistId = "5E1Mgv2x2WdPqiOvhfMZo1";
+
+console.log(import.meta);;
 
 (async () => {
 
@@ -22,4 +24,12 @@ const playlistId = "5E1Mgv2x2WdPqiOvhfMZo1";
     const track = data.items[0].track;
 
     console.log(track);
+
+    const recent = await (await fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=1`, {
+        headers: {
+            Authorization: `Bearer ${access_token}`
+        }
+    })).json();
+
+    console.log(recent);
 })();
