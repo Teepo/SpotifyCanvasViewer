@@ -20,10 +20,12 @@ console.log(import.meta);;
             Authorization: `Bearer ${access_token}`
         }
     })).json();
-    
-    const track = data.items[0].track;
 
-    console.log(track);
+    const uris = data.items.map(item => {
+        return item.track.uri;
+    });
+
+    console.log(uris.join("\n"));
 
     const recent = await (await fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=1`, {
         headers: {
