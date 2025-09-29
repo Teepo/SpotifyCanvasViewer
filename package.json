@@ -19,5 +19,8 @@
     "socket.io-client": "^4.8.1",
     "vite": "^7.1.7",
     "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.3"
   }
 }

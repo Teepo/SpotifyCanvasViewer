@@ -1,8 +1,6 @@
-const client_id = import.meta.env.SPOTIFY_CLIENT_ID;
-const client_secret = import.meta.env.SPOTIFY_CLIENT_SECRET;
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const playlistId = "5E1Mgv2x2WdPqiOvhfMZo1";
-
-console.log(import.meta);;
 
 (async () => {
 
@@ -15,11 +13,15 @@ console.log(import.meta);;
         body: "grant_type=client_credentials",
     })).json();
 
+    console.log(access_token);
+
     const data = await (await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
         headers: {
             Authorization: `Bearer ${access_token}`
         }
     })).json();
+
+    console.log(data);
 
     const uris = data.items.map(item => {
         return item.track.uri;
