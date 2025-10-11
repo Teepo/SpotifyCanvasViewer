@@ -1,0 +1,22 @@
+@use 'vuetify/settings';
+
+html {
+
+    $size: 30px;
+
+    font-size: clamp($size, 1vw, $size);
+    line-height: 2;
+}
+
+.v-btn--stacked {
+
+    gap: 30px;
+
+    .v-btn__prepend {
+        margin-bottom: 0;
+    }
+
+    .v-icon {
+        --v-icon-size-multiplier: 3;
+    }
+}
