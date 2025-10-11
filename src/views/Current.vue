@@ -12,14 +12,19 @@ import { ref, onMounted } from 'vue';
 
 import { getCurrentlyPlaying } from '../services/spotify';
 
-let currentTrack = ref(null);
+let currentTrack = ref(false);
 
 onMounted(async () => {
 
     async function getCurrentTrack() {
-        currentTrack.value = await getCurrentlyPlaying();
 
-        fetchCanvas(currentTrack.value.id);
+        const track = await getCurrentlyPlaying();
+
+        if (track.id !== currentTrack.value.id) {
+            await fetchCanvas(track.id);
+        }
+
+        currentTrack.value = track;
 
         setTimeout(getCurrentTrack, 5000);
     }
@@ -27,8 +32,6 @@ onMounted(async () => {
     async function fetchCanvas(trackId) {
 
         const { canvasesList } = await (await fetch('https://localhost:8443/api/canvas/?trackId=' + trackId)).json();
-
-        console.log(canvasesList);
 
         if (canvasesList.length <= 0) {
             return;

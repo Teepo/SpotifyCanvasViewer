@@ -113,8 +113,6 @@ export async function getCurrentlyPlaying() {
 
     const { item } = recent;
 
-    console.log(item);
-
     return item;
 }
 
