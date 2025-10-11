@@ -58,5 +58,9 @@ export default ({ mode }) => {
                 usePolling: true
             }
         },
+        middlewareMode: false,
+        fs: {
+            strict: true
+        },
     });
 };

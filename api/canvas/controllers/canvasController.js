@@ -1,4 +1,10 @@
+import fs from 'fs'
+
+import { createWriteStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+
 import { getCanvases } from '../services/spotifyCanvasService.js';
+
 
 export const fetchCanvas = async (req, res) => {
   const { trackId } = req.query;
@@ -12,4 +18,27 @@ export const fetchCanvas = async (req, res) => {
   }
 
   res.json(canvasData);
+
+  downloadCanvas(trackId, canvasData);
 };
+
+async function downloadCanvas(trackId, canvasData) {
+
+  if (canvasData?.canvasesList.length <= 0) {
+    return;
+  }
+
+  const canvas = canvasData.canvasesList[0];
+
+  const request = await fetch(canvas.canvasUrl);
+
+  const outputPath = `./../../public/canvas/${trackId}.mp4`;
+
+  if (fs.existsSync(outputPath)) {
+    return;
+  }
+
+  const stream = createWriteStream(outputPath);
+
+  await pipeline(request.body, stream);
+}

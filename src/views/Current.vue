@@ -1,8 +1,8 @@
 <template>
     <v-container class="fill-height">
-        <v-alert type="warning" v-if="!isLogged()">Not logged</v-alert>
-        <v-alert type="info" v-if="currentTrack === false">Not track played</v-alert>
-        <v-alert type="success" v-if="!!currentTrack">{{ currentTrack.name }} - {{ currentTrack.id }}</v-alert>
+        <div class="canvas-container" v-if="!!currentTrack">
+            <video loop autoplay muted :src="`/canvas/${currentTrack.id}.mp4`" :poster="`${currentTrack.album.images[0].url}`"></video>
+        </div>
     </v-container>
 </template>
 
@@ -10,7 +10,7 @@
 
 import { ref, onMounted } from 'vue';
 
-import { isLogged, getCurrentlyPlaying } from '../services/spotify';
+import { getCurrentlyPlaying } from '../services/spotify';
 
 let currentTrack = ref(null);
 
@@ -19,12 +19,25 @@ onMounted(async () => {
     async function getCurrentTrack() {
         currentTrack.value = await getCurrentlyPlaying();
 
+        fetchCanvas(currentTrack.value.id);
+
         setTimeout(getCurrentTrack, 5000);
     }
 
-   await getCurrentTrack();
+    async function fetchCanvas(trackId) {
 
-   const canvas = await fetch('https://localhost:8443/api/canvas/?trackId=' + currentTrack.value.id);
+        const { canvasesList } = await (await fetch('https://localhost:8443/api/canvas/?trackId=' + trackId)).json();
+
+        console.log(canvasesList);
+
+        if (canvasesList.length <= 0) {
+            return;
+        }
+
+        await fetch('https://localhost:8443/api/canvas/?trackId=' + trackId);
+    }
+
+   await getCurrentTrack();
 });
 
 
