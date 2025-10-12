@@ -22,21 +22,12 @@ onMounted(async () => {
         const track = await getCurrentlyPlaying();
 
         if (track.id !== currentTrack.value.id) {
-            await fetchCanvas(track.id);
+            await fetch(`${process.env.API_CANVAS_URL}/api/canvas/?trackId=${track.id}`);
         }
 
         currentTrack.value = track;
 
         setTimeout(getCurrentTrack, 5000);
-    }
-
-    async function fetchCanvas(trackId) {
-
-        const { canvasesList } = await (await fetch(`${process.env.API_CANVAS_URL}/api/canvas/?trackId=${trackId}`)).json();
-
-        if (canvasesList.length <= 0) {
-            return;
-        }
     }
 
    await getCurrentTrack();

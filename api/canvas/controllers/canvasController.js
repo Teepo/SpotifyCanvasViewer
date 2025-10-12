@@ -17,9 +17,9 @@ export const fetchCanvas = async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch canvas data' });
   }
 
-  res.json(canvasData);
+  await downloadCanvas(trackId, canvasData);
 
-  downloadCanvas(trackId, canvasData);
+  res.json(canvasData);
 };
 
 async function downloadCanvas(trackId, canvasData) {
