@@ -24,6 +24,10 @@ export default ({ mode }) => {
 
     return defineConfig({
         base: mode === 'production' ? `/${gitRepoName}/` : '/',
+        build : {
+            outDir: `/var/www/anthony-ribeiro.dev/${gitRepoName}/`,
+            emptyOutDir: true
+        },
         plugins: [
             basicSsl(),
             vue({ 
