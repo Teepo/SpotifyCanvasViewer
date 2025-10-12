@@ -4,7 +4,7 @@
             <v-btn :to="{ name : 'playlist' }" size="x-large">
                 
                 <template v-slot:prepend>
-                    <v-img :width="200" :src="`${playlist.images[0].url}`" />
+                    <v-img :width="200" cover :src="`${playlist.images[0].url}`" />
                 </template>
                 
                 {{ playlist.name }}
@@ -35,6 +35,10 @@ onMounted(async () => {
     padding-left: 0;
 }
 
+.v-col {
+    overflow: hidden;
+}
+
 .v-btn {
     width: 100%;
     height: auto !important;
@@ -43,5 +47,13 @@ onMounted(async () => {
 
 .v-img {
     margin-right: 30px;
+    min-height: 200px;
+}
+</style>
+
+<style>
+.v-btn__content {
+    justify-content: start;
+    overflow: hidden;
 }
 </style>
