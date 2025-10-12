@@ -10,8 +10,8 @@
                 </v-col>
 
                 <v-col>
-                    <v-btn :to="{ name : 'playlist' }" prepend-icon="mdi-playlist-music-outline" stacked width="100%" height="33vh" size="x-large">
-                        By Playlist
+                    <v-btn :to="{ name : 'playlists' }" prepend-icon="mdi-playlist-music-outline" stacked width="100%" height="33vh" size="x-large">
+                        By Playlists
                     </v-btn>
                 </v-col>
             </v-row>

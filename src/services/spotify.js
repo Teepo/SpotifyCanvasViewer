@@ -116,6 +116,30 @@ export async function getCurrentlyPlaying() {
     return item;
 }
 
+export async function getPlaylists() {
+
+    const access_token = await requestAccessToken();
+
+    const request = await fetch(`https://api.spotify.com/v1/me/playlists`, {
+        headers: {
+            Authorization: `Bearer ${access_token}`
+        }
+    });
+
+    if (request.status === 401) {
+        return login(true);
+    }
+
+    const playlist = await request.json();
+
+    // no content
+    if (playlist.status === 204) {
+        return false;
+    }
+
+    return playlist;
+}
+
 export function getCode() {
     return localStorage.getItem('code');
 }
