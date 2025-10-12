@@ -32,13 +32,11 @@ onMounted(async () => {
 
     async function fetchCanvas(trackId) {
 
-        const { canvasesList } = await (await fetch('https://localhost:8443/api/canvas/?trackId=' + trackId)).json();
+        const { canvasesList } = await (await fetch(`${process.env.API_CANVAS_URL}/api/canvas/?trackId=${trackId}`)).json();
 
         if (canvasesList.length <= 0) {
             return;
         }
-
-        await fetch('https://localhost:8443/api/canvas/?trackId=' + trackId);
     }
 
    await getCurrentTrack();
