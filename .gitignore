@@ -1,9 +1,6 @@
 .screenrc
 .DS_STORE
 
-.env.dev
-.env.prod
-
 /.firebase/
 
 /node_modules/
