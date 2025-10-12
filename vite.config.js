@@ -12,56 +12,59 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 
 const gitRepoName = 'SpotifyCanvasViewer';
 
-const envContent = fs.readFileSync('.env')
-const env = dotenv.parse(envContent)
+export default ({ mode }) => {
 
-const defineEnv = {}
-for (const key in env) {
-    defineEnv[`process.env.${key}`] = JSON.stringify(env[key])
-}
+    const envContent = fs.readFileSync('.env')
+    const env = dotenv.parse(envContent)
 
-export default defineConfig({
-    base : `/${gitRepoName}/`,
-    build : {
-        outDir: `/var/www/anthony-ribeiro.dev/${gitRepoName}/`,
-        emptyOutDir: true
-    },
-    plugins: [
-        basicSsl(),
-        vue({
-            template: { transformAssetUrls }
-        }),
-        vuetify({
-            autoImport: true,
-            styles: {
-                configFile: 'src/styles/settings.scss',
-            },
-        }),
-    ],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+    const defineEnv = {}
+    for (const key in env) {
+        defineEnv[`process.env.${key}`] = JSON.stringify(env[key])
+    }
+
+    return defineConfig({
+        base: mode === 'production' ? `/${gitRepoName}/` : '/',
+        build : {
+            outDir: `/var/www/anthony-ribeiro.dev/${gitRepoName}/`,
+            emptyOutDir: true
         },
-        extensions: [
-            '.js',
-            '.json',
-            '.jsx',
-            '.mjs',
-            '.ts',
-            '.tsx',
-            '.vue',
-            '.scss',
+        plugins: [
+            basicSsl(),
+            vue({
+                template: { transformAssetUrls }
+            }),
+            vuetify({
+                autoImport: true,
+                styles: {
+                    configFile: 'src/styles/settings.scss',
+                },
+            }),
         ],
-    },
-    define: defineEnv,
-    server: {
-        port: 3000,
-        watch: {
-            usePolling: true
-        }
-    },
-    middlewareMode: false,
-    fs: {
-        strict: true
-    },
-});
+        resolve: {
+            alias: {
+                '@': fileURLToPath(new URL('./src', import.meta.url))
+            },
+            extensions: [
+                '.js',
+                '.json',
+                '.jsx',
+                '.mjs',
+                '.ts',
+                '.tsx',
+                '.vue',
+                '.scss',
+            ],
+        },
+        define: defineEnv,
+        server: {
+            port: 3000,
+            watch: {
+                usePolling: true
+            }
+        },
+        middlewareMode: false,
+        fs: {
+            strict: true
+        },
+    });
+};
