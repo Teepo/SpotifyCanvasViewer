@@ -1,7 +1,7 @@
 <template>
     <v-container class="fill-height">
         <div class="canvas-container">
-            <video autoplay muted :src="`${currentVideo}`"></video>
+            <video autoplay muted :src="`${BASE_URL}${currentVideo}`"></video>
         </div>
     </v-container>
 </template>
@@ -13,6 +13,8 @@ import { onMounted, ref } from 'vue';
 import { getFileNameAndExtension } from './../utils/string';
 
 const currentVideo = ref(null);
+
+const BASE_URL = ref(process.env.BASE_URL);
 
 onMounted(async () => {
 
