@@ -1,7 +1,7 @@
 <template>
     <v-container class="fill-height">
         <div class="canvas-container" v-if="!!currentTrack">
-            <video loop autoplay muted :src="`/canvas/${currentTrack.id}.mp4`" :poster="`${currentTrack.album.images[0].url}`"></video>
+            <video loop autoplay muted :src="`${BASE_URL}/canvas/${currentTrack.id}.mp4`" :poster="`${currentTrack.album.images[0].url}`"></video>
         </div>
         <v-alert type="warning" v-else>No track played</v-alert>
     </v-container>
@@ -14,6 +14,8 @@ import { ref, onMounted } from 'vue';
 import { getCurrentlyPlaying } from '../services/spotify';
 
 let currentTrack = ref(false);
+
+const BASE_URL = ref(process.env.BASE_URL);
 
 onMounted(async () => {
 
