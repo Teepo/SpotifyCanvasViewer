@@ -22,6 +22,12 @@
                         Shuffle
                     </v-btn>
                 </v-col>
+
+                <v-col>
+                    <v-btn :to="{ name : 'theater' }" prepend-icon="mdi-theater" stacked width="100%" height="33vh" size="x-large">
+                        Theater Mode
+                    </v-btn>
+                </v-col>
             </v-row>
 
         </v-responsive>

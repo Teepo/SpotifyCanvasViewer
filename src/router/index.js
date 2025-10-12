@@ -18,13 +18,17 @@ const routes = [
         name: 'playlist',
         component: () => import(/* webpackChunkName: "playlist" */ '@/views/Playlist.vue'),
       }, {
+        path: '/theater',
+        name: 'theater',
+        component: () => import(/* webpackChunkName: "theater" */ '@/views/Theater.vue'),
+      }, {
         path: '/shuffle',
         name: 'shuffle',
         component: () => import(/* webpackChunkName: "shuffle" */ '@/views/Shuffle.vue'),
-      },{
+      }, {
         path: '/spotify_login_callback',
-        name: 'shuffle',
-        component: () => import(/* webpackChunkName: "shuffle" */ '@/views/SpotifyCallback.vue'),
+        name: 'spotify_login_callback',
+        component: () => import(/* webpackChunkName: "spotify_login_callback" */ '@/views/SpotifyCallback.vue'),
       },
     ],
   }

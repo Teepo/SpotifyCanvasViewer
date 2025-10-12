@@ -8,6 +8,6 @@ setAuthorizeCode();
 
 const router = useRouter();
 
-router.push({ name: 'current' });
+//router.push({ name: 'current' });
 
 </script>
