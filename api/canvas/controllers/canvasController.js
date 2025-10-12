@@ -5,7 +5,6 @@ import { pipeline } from 'node:stream/promises';
 
 import { getCanvases } from '../services/spotifyCanvasService.js';
 
-
 export const fetchCanvas = async (req, res) => {
   const { trackId } = req.query;
   if (!trackId) {
@@ -32,7 +31,7 @@ async function downloadCanvas(trackId, canvasData) {
 
   const request = await fetch(canvas.canvasUrl);
 
-  const outputPath = `./../../public/canvas/${trackId}.mp4`;
+  const outputPath = `${process.env.API_CANVAS_VIDEO_OUTPUT_DIR}/${trackId}.mp4`;
 
   if (fs.existsSync(outputPath)) {
     return;
