@@ -120,7 +120,7 @@ export async function getPlaylists() {
 
     const access_token = await requestAccessToken();
 
-    const request = await fetch(`https://api.spotify.com/v1/me/playlists`, {
+    const request = await fetch(`https://api.spotify.com/v1/me/playlists?limit=50`, {
         headers: {
             Authorization: `Bearer ${access_token}`
         }

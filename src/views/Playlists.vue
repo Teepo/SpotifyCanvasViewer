@@ -30,7 +30,6 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-
 .v-col,
 .v-btn {
     padding-left: 0;
@@ -44,14 +43,5 @@ onMounted(async () => {
 
 .v-img {
     margin-right: 30px;
-}
-</style>
-
-<style>
-.v-btn__content {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 </style>
