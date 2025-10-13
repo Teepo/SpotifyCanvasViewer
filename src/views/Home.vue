@@ -34,6 +34,10 @@
     </v-container>
 </template>
 
-<script>
-    export default {}
-</script>
+<style lang="scss">
+.v-btn {
+    &__content {
+        text-align: center;
+    }
+}
+</style>
