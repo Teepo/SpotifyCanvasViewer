@@ -13,6 +13,8 @@ import { ref, onMounted } from 'vue';
 
 import { getCurrentlyPlaying } from '../services/spotify';
 
+import { sleep } from './../utils/timing';
+
 let currentTrack = ref(false);
 
 const BASE_URL = ref(process.env.BASE_URL);
@@ -25,6 +27,7 @@ onMounted(async () => {
 
         if (track.id !== currentTrack.value.id) {
             await fetch(`${process.env.API_CANVAS_URL}/api/canvas/?trackId=${track.id}`);
+            await sleep(100);
         }
 
         currentTrack.value = track;
@@ -34,6 +37,5 @@ onMounted(async () => {
 
    await getCurrentTrack();
 });
-
 
 </script>

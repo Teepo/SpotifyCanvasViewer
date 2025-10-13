@@ -1,7 +1,7 @@
 <template>
     <v-container class="fill-height">
         <div class="canvas-container">
-            <video autoplay muted :src="`${BASE_URL}${currentVideo}`"></video>
+            <video autoplay muted :src="`${BASE_URL}/canvas/${currentVideo}`"></video>
         </div>
     </v-container>
 </template>
@@ -10,21 +10,13 @@
 
 import { onMounted, ref } from 'vue';
 
-import { getFileNameAndExtension } from './../utils/string';
-
 const currentVideo = ref(null);
 
 const BASE_URL = ref(process.env.BASE_URL);
 
 onMounted(async () => {
 
-    const files = import.meta.glob('./../../public/canvas/*.mp4', { eager: true });
-    
-    const canvas = [];
-
-    for (const path in files) {
-        canvas.push(`/canvas/${getFileNameAndExtension(path)}`);
-    }
+    const canvas = await (await fetch(`${process.env.API_CANVAS_URL}/api/canvas_list`)).json();
 
     currentVideo.value = canvas.shift();
 
