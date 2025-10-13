@@ -20,8 +20,6 @@ onMounted(async () => {
 
     currentVideo.value = canvas.shift();
 
-    document.querySelector('video').requestFullscreen();
-
     let loop = 0;
 
     document.querySelector('video').addEventListener('ended', () => {

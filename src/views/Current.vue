@@ -21,8 +21,6 @@ const BASE_URL = ref(process.env.BASE_URL);
 
 onMounted(async () => {
 
-    document.querySelector('video').requestFullscreen();
-
     async function getCurrentTrack() {
 
         const track = await getCurrentlyPlaying();
