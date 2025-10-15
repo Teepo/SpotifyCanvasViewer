@@ -8,12 +8,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "firebase-deploy": "yarn run build --mode=firebase && firebase deploy"
+    "firebase-deploy": "yarn run build --mode=firebase && firebase deploy",
+    "electron": "electron ./src/electron.js"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "electron": "^38.3.0",
     "express": "^5.1.0",
     "firebase": "^12.3.0",
     "firebase-tools": "^14.17.0",
