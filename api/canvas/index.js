@@ -62,6 +62,7 @@ app.use('/api/canvas_list', async (req, res) => {
         fs
             .readdirSync(process.env.API_CANVAS_VIDEO_OUTPUT_DIR)
             .filter(file => path.extname(file).toLowerCase() === '.mp4')
+            .sort(() => Math.random() - .5)
     );
 });
 
